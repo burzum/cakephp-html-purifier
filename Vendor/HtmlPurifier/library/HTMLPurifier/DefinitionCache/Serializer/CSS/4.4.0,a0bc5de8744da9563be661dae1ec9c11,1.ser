@@ -1,0 +1,1 @@
+O:26:"HTMLPurifier_CSSDefinition":4:{s:4:"type";s:3:"CSS";s:4:"info";a:1:{s:15:"text-decoration";O:43:"HTMLPurifier_AttrDef_CSS_ImportantDecorator":4:{s:3:"def";O:39:"HTMLPurifier_AttrDef_CSS_TextDecoration":2:{s:9:"minimized";b:0;s:8:"required";b:0;}s:5:"allow";b:0;s:9:"minimized";b:0;s:8:"required";b:0;}}s:5:"setup";b:1;s:9:"optimized";N;}
