@@ -45,7 +45,7 @@ class Purifier extends Object {
 
 		if (empty($config)) {
 			if (!isset($_this->_configs[$configName])) {
-				throw new InvalidArgumentException(__('Configuration %s does not exist!', $name));
+				throw new InvalidArgumentException(__('Configuration %s does not exist!', $configName));
 			}
 			return $_this->_configs[$configName];
 		}

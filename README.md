@@ -27,7 +27,7 @@ In APP/Config/boostrap.php you can either set the purifier config as an array or
 The array style would look like this:
 
 	Purifier::config('ConfigName', array(
-		'HTML.AllowedElements' => 'a, em, blockquote, p, strong, pre, code, span,ul,ol,li,img';
+		'HTML.AllowedElements' => 'a, em, blockquote, p, strong, pre, code, span,ul,ol,li,img',
 		'HTML.AllowedAttributes' => 'a.href, a.title, img.src, img.alt'));
 
 The plugin will construct a HTML Purifier config from that and instantiate the purifier.
