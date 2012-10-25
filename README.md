@@ -18,6 +18,20 @@ In APP/bootstrap.php add
 
 ## Usage
 
+### If you use APC ...
+
+...and get this error message
+
+	Fatal error: Cannot override final method HTMLPurifier_VarParser::parse()
+
+you can fix this by adding
+
+	Configure::write(''HtmlPurifier.standalone', true);
+
+to your bootstrap.php *before* you load this plugin.
+
+This line will use a compacted one file version of Html Purifier. This is an official and know issue and workaround, see http://htmlpurifier.org/phorum/read.php?3,4099,6680.
+
 ### Configuration
 
 Important: Before you start declaring a configuration you should lookup how HTML Purifier can be configured. http://htmlpurifier.org/docs
