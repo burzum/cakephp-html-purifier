@@ -10,7 +10,7 @@ App::uses('Purifier', 'HtmlPurifier.Lib');
 class HtmlPurifierBehavior extends ModelBehavior {
 	
 	public function setup(Model $Model, $settings = array()) {
-		$this->settings = $settings;
+		$this->settings[$Model->alias] = (array)$settings;
 	}
 /**
  * beforeSave
@@ -19,7 +19,7 @@ class HtmlPurifierBehavior extends ModelBehavior {
  * @return boolean
  */
 	public function beforeSave(Model $Model, $options = array()) {
-		extract($this->settings); 
+		extract($this->settings[$Model->alias]); 
 
 		foreach($fields as $field) { 
 			if (isset($Model->data[$Model->alias][$field])) { 
