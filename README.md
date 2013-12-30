@@ -75,7 +75,7 @@ For some automatization you can also use the Behavior or Helper.
 Set a config you want to use and the fields you want to sanitize.
 
 	public $actsAs = array(
-		'HtmlPurifier' => array(
+		'HtmlPurifier.HtmlPurifier' => array(
 			'config' => 'ConfigName',
 			'fields' => array(
 				'body', 'excerpt')));
