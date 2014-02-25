@@ -119,7 +119,9 @@ public $helpers = array(
 
 In the views you can then use the helper like this:
 
-	$this->HtmlPurifier->clean($markup, 'ConfigName');
+```php
+$this->HtmlPurifier->clean($markup, 'ConfigName');
+```
 
 ## Support
 
