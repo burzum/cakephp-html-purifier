@@ -8,13 +8,19 @@ The plugin includes a Helper and Behavior to clean your markup wherever you like
 
 ## Setup
 
-Clone the code
+Clone the code into your apps plugin folder
 
-	git clone git://github.com/burzum/HtmlPurifier.git
+	git clone git@github.com:burzum/cakephp-html-purifier.git app/Plugin/HtmlPurifier
+
+or add it as submodule
+
+	git submodule add git@github.com:burzum/cakephp-html-purifier.git app/Plugin/HtmlPurifier
 
 In APP/bootstrap.php add
 
-	CakePlugin::load('HtmlPurifier', array('bootstrap' => true));
+```php
+CakePlugin::load('HtmlPurifier', array('bootstrap' => true));
+```
 
 ## Usage
 
@@ -26,7 +32,9 @@ In APP/bootstrap.php add
 
 you can fix this by adding
 
-	Configure::write(''HtmlPurifier.standalone', true);
+```php
+Configure::write(''HtmlPurifier.standalone', true);
+```
 
 to your bootstrap.php *before* you load this plugin.
 
@@ -40,33 +48,45 @@ In APP/Config/boostrap.php you can either set the purifier config as an array or
 
 The array style would look like this:
 
+```php
 	Purifier::config('ConfigName', array(
-		'HTML.AllowedElements' => 'a, em, blockquote, p, strong, pre, code, span,ul,ol,li,img',
-		'HTML.AllowedAttributes' => 'a.href, a.title, img.src, img.alt'));
+			'HTML.AllowedElements' => 'a, em, blockquote, p, strong, pre, code, span,ul,ol,li,img',
+			'HTML.AllowedAttributes' => 'a.href, a.title, img.src, img.alt'
+		)
+	);
+```
 
 The plugin will construct a HTML Purifier config from that and instantiate the purifier.
 
 A pure HTML Purifier config might look like this one:
 
-	$config = HTMLPurifier_Config::createDefault();
-	$config->set('HTML.AllowedElements', 'a, em, blockquote, p, strong, pre, code, span,ul,ol,li,img');
-	$config->set('HTML.AllowedAttributes', 'a.href, a.title, img.src, img.alt');
-	$config->set('HTML.AllowedAttributes', "*.style");
-	$config->set('CSS.AllowedProperties', 'text-decoration');
-	$config->set('HTML.TidyLevel', 'heavy');
-	$config->set('HTML.Doctype', 'XHTML 1.0 Transitional');
+```php
+$config = HTMLPurifier_Config::createDefault();
+$config->set('HTML.AllowedElements', 'a, em, blockquote, p, strong, pre, code, span,ul,ol,li,img');
+$config->set('HTML.AllowedAttributes', 'a.href, a.title, img.src, img.alt');
+$config->set('HTML.AllowedAttributes', "*.style");
+$config->set('CSS.AllowedProperties', 'text-decoration');
+$config->set('HTML.TidyLevel', 'heavy');
+$config->set('HTML.Doctype', 'XHTML 1.0 Transitional');
+```
 
 Simply assign it to a config:
 
-	Purifier::config('ConfigName', $config);
+```php
+Purifier::config('ConfigName', $config);
+```
 
 Now that you have a configured instance of HTML Purifier ready you can use it directly and get you an instance of the purifier
 
-	Purifier::config('ConfigName');
+```php
+Purifier::config('ConfigName');
+```
 
 or clean some dirty HTML directly by calling
 
-	Purifier::clean($markup, 'ConfigName');
+```php
+Purifier::clean($markup, 'ConfigName');
+```
 
 For some automatization you can also use the Behavior or Helper.
 
@@ -74,19 +94,28 @@ For some automatization you can also use the Behavior or Helper.
 
 Set a config you want to use and the fields you want to sanitize.
 
-	public $actsAs = array(
-		'HtmlPurifier.HtmlPurifier' => array(
-			'config' => 'ConfigName',
-			'fields' => array(
-				'body', 'excerpt')));
+```php
+public $actsAs = array(
+	'HtmlPurifier.HtmlPurifier' => array(
+		'config' => 'ConfigName',
+		'fields' => array(
+			'body', 'excerpt'
+		)
+	)
+);
+```
 
 ### The Helper
 
 In your controller load the helper and set a default config if you want.
 
-	public $helpers = array(
-		'HtmlPurifier' => array(
-			'config' => 'ConfigName'));
+```php
+public $helpers = array(
+	'HtmlPurifier.HtmlPurifier' => array(
+		'config' => 'ConfigName'
+	)
+);
+```
 
 In the views you can then use the helper like this:
 
@@ -100,7 +129,7 @@ https://github.com/burzum/HtmlPurifier/issues
 
 ## License
 
-Copyright 2012, Florian Krämer
+Copyright 2012 - 2014, Florian Krämer
 
 Licensed under The MIT License
 Redistributions of files must retain the above copyright notice.
