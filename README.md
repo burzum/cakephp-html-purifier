@@ -44,16 +44,16 @@ This line will use a compacted one file version of Html Purifier. This is an off
 
 Important: Before you start declaring a configuration you should lookup how HTML Purifier can be configured. http://htmlpurifier.org/docs
 
-In APP/Config/boostrap.php you can either set the purifier config as an array or pass a native config object.
+In app/Config/boostrap.php you can either set the purifier config as an array or pass a native config object.
 
 The array style would look like this:
 
 ```php
-	Purifier::config('ConfigName', array(
-			'HTML.AllowedElements' => 'a, em, blockquote, p, strong, pre, code, span,ul,ol,li,img',
-			'HTML.AllowedAttributes' => 'a.href, a.title, img.src, img.alt'
-		)
-	);
+Purifier::config('ConfigName', array(
+		'HTML.AllowedElements' => 'a, em, blockquote, p, strong, pre, code, span,ul,ol,li,img',
+		'HTML.AllowedAttributes' => 'a.href, a.title, img.src, img.alt'
+	)
+);
 ```
 
 The plugin will construct a HTML Purifier config from that and instantiate the purifier.
@@ -126,6 +126,15 @@ In the views you can then use the helper like this:
 For support and feature request, please visit the HtmlPurifier issue page
 
 https://github.com/burzum/HtmlPurifier/issues
+
+Contributing
+------------
+
+To contribute to this plugin please follow a few basic rules.
+
+* Pull requests must be send to the ```develop``` branch.
+* Contributions must follow the [CakePHP coding standard](http://book.cakephp.org/2.0/en/contributing/cakephp-coding-conventions.html).
+* [Unit tests](http://book.cakephp.org/2.0/en/development/testing.html) are required.
 
 ## License
 
