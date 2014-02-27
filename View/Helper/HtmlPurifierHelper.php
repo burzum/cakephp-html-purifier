@@ -8,6 +8,7 @@ App::uses('Purifier', 'HtmlPurifier.Lib');
  * @license MIT
  */
 class HtmlPurifierHelper extends AppHelper {
+
 /**
  * Settings
  *
@@ -20,6 +21,7 @@ class HtmlPurifierHelper extends AppHelper {
  *
  * @param View $View the view object the helper is attached to.
  * @param array $settings Settings array contains name of engine helper.
+ * @return void
  */
 	public function __construct(View $View, $settings = array()) {
 		$this->settings = $settings;

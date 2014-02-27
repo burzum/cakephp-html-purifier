@@ -8,7 +8,7 @@ App::uses('Purifier', 'HtmlPurifier.Lib');
  * @license MIT
  */
 class HtmlPurifierBehavior extends ModelBehavior {
-	
+
 	public function setup(Model $Model, $settings = array()) {
 		$this->settings[$Model->alias] = (array)$settings;
 	}
@@ -19,14 +19,12 @@ class HtmlPurifierBehavior extends ModelBehavior {
  * @return boolean
  */
 	public function beforeSave(Model $Model, $options = array()) {
-		extract($this->settings[$Model->alias]); 
-
-		foreach($fields as $field) { 
-			if (isset($Model->data[$Model->alias][$field])) { 
+		extract($this->settings[$Model->alias]);
+		foreach ($fields as $field) {
+			if (isset($Model->data[$Model->alias][$field])) {
 				$Model->data[$Model->alias][$field] = $this->purifyHtml($Model, $Model->data[$Model->alias][$field], $config);
 			}
 		}
-
 		return true;
 	}
 
@@ -36,6 +34,7 @@ class HtmlPurifierBehavior extends ModelBehavior {
  * @param Model $Model
  * @param string $markup
  * @param string $config
+ * @return string
  */
 	public function purifyHtml(Model $Model, $markup, $config) {
 		return Purifier::clean($markup, $config);

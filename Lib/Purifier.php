@@ -7,6 +7,7 @@
  * @license MIT
  */
 class Purifier extends Object {
+
 /**
  * Purifier configurations
  *
@@ -39,6 +40,8 @@ class Purifier extends Object {
  *
  * @param string $markup
  * @param string $configName
+ * @throws InvalidArgumentException
+ * @return HTMLPurifier_Config object
  */
 	public static function config($configName, $config = null) {
 		$_this = Purifier::getInstance();
@@ -68,6 +71,7 @@ class Purifier extends Object {
  * Gets an instance of the purifier lib only when needed, lazy loading it
  *
  * @param string $configName
+ * @throws InvalidArgumentException
  * @return HTMLPurifier
  */
 	public static function getPurifierInstance($configName = null) {
@@ -88,6 +92,8 @@ class Purifier extends Object {
  *
  * @param string $markup
  * @param string $configName
+ * @throws InvalidArgumentException
+ * @return HTMLPurifier
  */
 	public static function clean($markup, $configName = null) {
 		$_this = Purifier::getInstance();
