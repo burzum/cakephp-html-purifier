@@ -8,7 +8,7 @@
  * @license MIT
  */
 class HtmlPurifierComponent extends Component {
-	
+
 /**
  * Settings
  *
