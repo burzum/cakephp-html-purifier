@@ -19,11 +19,20 @@ class HtmlPurifierBehavior extends ModelBehavior {
  * @return boolean
  */
 	public function beforeSave(Model $Model, $options = array()) {
-		extract($this->settings[$Model->alias]);
 
-		foreach($fields as $field) {
-			if (isset($Model->data[$Model->alias][$field])) {
-				$Model->data[$Model->alias][$field] = $this->purifyHtml($Model, $Model->data[$Model->alias][$field], $config);
+		if (!empty($this->settings[$Model->alias]['fields'])) {
+			foreach($this->settings[$Model->alias]['fields'] as $field) {
+				if (isset($Model->data[$Model->alias][$field])) {
+					$Model->data[$Model->alias][$field] = $this->purifyHtml($Model, $Model->data[$Model->alias][$field], $config);
+				}
+			}
+		}
+
+		if (!empty($this->settings[$Model->alias]['striptags'])) {
+			foreach ($this->settings[$Model->alias]['striptags'] as $field) {
+				if (isset($Model->data[$Model->alias][$field])) {
+					$Model->data[$Model->alias][$field] = $this->stripTags($Model, $Model->data[$Model->alias][$field]);
+				}
 			}
 		}
 
@@ -39,6 +48,10 @@ class HtmlPurifierBehavior extends ModelBehavior {
  */
 	public function purifyHtml(Model $Model, $markup, $config) {
 		return Purifier::clean($markup, $config);
+	}
+
+	public function stripTags(Model $Model, $markup) {
+		return strip_tags($markup);
 	}
 
 }
