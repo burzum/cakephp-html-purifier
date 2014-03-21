@@ -38,8 +38,7 @@ class HtmlPurifierBehavior extends ModelBehavior {
  * @param string $config
  */
 	public function purifyHtml(Model $Model, $markup, $config) {
-		return strip_tags($markup);
-		//return Purifier::clean($markup, $config);
+		return Purifier::clean($markup, $config);
 	}
 
 }
