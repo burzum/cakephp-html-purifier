@@ -19,7 +19,7 @@ class HtmlPurifierBehavior extends ModelBehavior {
  * @return boolean
  */
 	public function beforeSave(Model $Model, $options = array()) {
-
+		extract($this->settings[$Model->alias]);
 		if (!empty($this->settings[$Model->alias]['fields'])) {
 			foreach($this->settings[$Model->alias]['fields'] as $field) {
 				if (isset($Model->data[$Model->alias][$field])) {
