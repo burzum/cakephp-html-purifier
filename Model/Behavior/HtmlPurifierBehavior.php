@@ -8,7 +8,7 @@ App::uses('Purifier', 'HtmlPurifier.Lib');
  * @license MIT
  */
 class HtmlPurifierBehavior extends ModelBehavior {
-	
+
 	public function setup(Model $Model, $settings = array()) {
 		$this->settings[$Model->alias] = (array)$settings;
 	}
@@ -19,11 +19,20 @@ class HtmlPurifierBehavior extends ModelBehavior {
  * @return boolean
  */
 	public function beforeSave(Model $Model, $options = array()) {
-		extract($this->settings[$Model->alias]); 
+		extract($this->settings[$Model->alias]);
+		if (!empty($this->settings[$Model->alias]['fields'])) {
+			foreach($this->settings[$Model->alias]['fields'] as $field) {
+				if (isset($Model->data[$Model->alias][$field])) {
+					$Model->data[$Model->alias][$field] = $this->purifyHtml($Model, $Model->data[$Model->alias][$field], $config);
+				}
+			}
+		}
 
-		foreach($fields as $field) { 
-			if (isset($Model->data[$Model->alias][$field])) { 
-				$Model->data[$Model->alias][$field] = $this->purifyHtml($Model, $Model->data[$Model->alias][$field], $config);
+		if (!empty($this->settings[$Model->alias]['striptags'])) {
+			foreach ($this->settings[$Model->alias]['striptags'] as $field) {
+				if (isset($Model->data[$Model->alias][$field])) {
+					$Model->data[$Model->alias][$field] = $this->stripTags($Model, $Model->data[$Model->alias][$field]);
+				}
 			}
 		}
 
@@ -41,4 +50,13 @@ class HtmlPurifierBehavior extends ModelBehavior {
 		return Purifier::clean($markup, $config);
 	}
 
+/**
+ * strips markup of tags
+ * @param Model $Model
+ * @param string $markup
+ * @return string
+ */
+	public function stripTags(Model $Model, $markup) {
+		return strip_tags($markup);
+	}
 }
