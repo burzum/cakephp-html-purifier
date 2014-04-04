@@ -90,6 +90,19 @@ Purifier::clean($markup, 'ConfigName');
 
 For some automatization you can also use the Behavior or Helper.
 
+### Caching ###
+
+It is recommended to change the path of the purifier libs cache to your APP/tmp folder. For example:
+
+```php
+Purifier::config('ConfigName', array(
+		'Cache.SerializerPath' => APP . 'tmp' . DS . 'purifier',
+	)
+);
+```
+
+See this page as well http://htmlpurifier.org/live/configdoc/plain.html#Cache.
+
 ### The Behavior
 
 Set a config you want to use and the fields you want to sanitize.
