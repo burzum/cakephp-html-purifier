@@ -8,14 +8,21 @@ App::uses('Purifier', 'HtmlPurifier.Lib');
  * @license MIT
  */
 class HtmlPurifierBehavior extends ModelBehavior {
-	
+
+/**
+ * Setup
+ *
+ * @param Model $Model
+ * @param array $settings
+ */
 	public function setup(Model $Model, $settings = array()) {
 		$this->settings[$Model->alias] = (array)$settings;
 	}
 /**
  * beforeSave
  *
- * @param Model $model
+ * @param Model $Model
+ * @param array $options
  * @return boolean
  */
 	public function beforeSave(Model $Model, $options = array()) {
