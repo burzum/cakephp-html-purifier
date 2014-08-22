@@ -38,6 +38,25 @@ class HtmlPurifierBehavior extends ModelBehavior {
 	}
 
 /**
+ * beforeValidate
+ *
+ * @param Model $Model
+ * @param array $options
+ * @return boolean
+ */
+	public function beforeValidate(Model $Model, $options = array()) {
+		extract($this->settings[$Model->alias]); 
+
+		foreach($fields as $field) { 
+			if (isset($Model->data[$Model->alias][$field])) { 
+				$Model->data[$Model->alias][$field] = $this->purifyHtml($Model, $Model->data[$Model->alias][$field], $config);
+			}
+		}
+
+		return true;
+	}
+
+/**
  * Cleans markup
  *
  * @param Model $Model
