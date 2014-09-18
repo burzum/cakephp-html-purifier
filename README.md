@@ -63,8 +63,7 @@ A pure HTML Purifier config might look like this one:
 ```php
 $config = HTMLPurifier_Config::createDefault();
 $config->set('HTML.AllowedElements', 'a, em, blockquote, p, strong, pre, code, span,ul,ol,li,img');
-$config->set('HTML.AllowedAttributes', 'a.href, a.title, img.src, img.alt');
-$config->set('HTML.AllowedAttributes', "*.style");
+$config->set('HTML.AllowedAttributes', 'a.href, a.title, img.src, img.alt, *.style');
 $config->set('CSS.AllowedProperties', 'text-decoration');
 $config->set('HTML.TidyLevel', 'heavy');
 $config->set('HTML.Doctype', 'XHTML 1.0 Transitional');
