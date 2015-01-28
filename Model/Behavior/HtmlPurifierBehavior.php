@@ -98,9 +98,17 @@ class HtmlPurifierBehavior extends ModelBehavior {
  */
 	public function cleanFields(Model $Model, $data = array(), $options = array()) {
 		extract(Hash::merge($this->settings[$Model->alias], $options));
-		foreach($fields as $field) {
+		foreach($fields as $key => $value) {
+			if (is_numeric($key)) {
+				$field = $value;
+				$config = $purifierConfig;
+			} else {
+				$field = $key;
+				$config = $value;
+			}
+
 			if (isset($data[$Model->alias][$field])) {
-				$data[$Model->alias][$field] = $this->purifyHtml($Model, $data[$Model->alias][$field], $purifierConfig);
+				$data[$Model->alias][$field] = $this->purifyHtml($Model, $data[$Model->alias][$field], $config);
 			}
 		}
 		return $data;
