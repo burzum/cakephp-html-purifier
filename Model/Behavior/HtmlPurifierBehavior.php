@@ -55,6 +55,24 @@ class HtmlPurifierBehavior extends ModelBehavior {
 	}
 
 /**
+ * afterFind
+ *
+ * @param Model $Model
+ * @param mixed $results The results of the find operation
+ * @param bool $primary Whether this model is being queried directly (vs. being queried as an association)
+ * @return mixed Purified result of the find operation
+ * @return boolean
+ */
+	public function afterFind(Model $Model, $results, $primary = false) {
+		if ($this->settings[$Model->alias]['purifyOn'] === 'afterFind') {
+			foreach ($results as $key => $result) {
+				$results[$key] = $this->cleanFields($Model, $result);
+			}
+		}
+		return $results;
+	}
+
+/**
  * beforeValidate
  *
  * @param Model $Model
