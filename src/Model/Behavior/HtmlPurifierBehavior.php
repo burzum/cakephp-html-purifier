@@ -1,5 +1,9 @@
 <?php
-App::uses('Purifier', 'HtmlPurifier.Lib');
+namespace Burzum\HtmlPurifier\ModelBehavior;
+
+use Cake\ORM\Behavior;
+use Burzum\HtmlPurifier\Lib\PurifierTrait;
+
 /**
  * HtmlPurifierBehavior
  *
@@ -7,7 +11,9 @@ App::uses('Purifier', 'HtmlPurifier.Lib');
  * @copyright 2012 Florian Krämer
  * @license MIT
  */
-class HtmlPurifierBehavior extends ModelBehavior {
+class HtmlPurifierBehavior extends Behavior {
+
+	use PurifierTrait;
 
 /**
  * Setup
@@ -25,27 +31,11 @@ class HtmlPurifierBehavior extends ModelBehavior {
  * @param array $options
  * @return boolean
  */
-	public function beforeSave(Model $Model, $options = array()) {
-		extract($this->settings[$Model->alias]); 
-
-		foreach($fields as $field) { 
+	public function beforeSave(Event $event) {
+		foreach($fields as $field) {
 			if (isset($Model->data[$Model->alias][$field])) { 
 				$Model->data[$Model->alias][$field] = $this->purifyHtml($Model, $Model->data[$Model->alias][$field], $config);
 			}
 		}
-
-		return true;
 	}
-
-/**
- * Cleans markup
- *
- * @param Model $Model
- * @param string $markup
- * @param string $config
- */
-	public function purifyHtml(Model $Model, $markup, $config) {
-		return Purifier::clean($markup, $config);
-	}
-
 }

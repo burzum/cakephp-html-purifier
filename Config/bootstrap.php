@@ -1,4 +1,6 @@
 <?php
+use Burzum\HtmlPurifier\Lib\HtmlPurifier;
+
 if (Configure::read('HtmlPurifier.standalone') != true) {
 	require_once( CakePlugin::path('HtmlPurifier') . 'Vendor' . DS . 'HtmlPurifier' . DS . 'library' . DS . 'HTMLPurifier.auto.php' );
 } else {

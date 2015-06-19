@@ -1,4 +1,6 @@
 <?php
+namespace Burzum\HtmlPurifier\Lib;
+
 /**
  * Purifier
  *
