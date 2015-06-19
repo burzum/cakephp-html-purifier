@@ -1,5 +1,8 @@
 <?php
-App::uses('Purifier', 'HtmlPurifier.Lib');
+namespace Burzum\HtmlPurifier\View\Helper;
+
+use Cake\View\Helper;
+
 /**
  * HtmlPurifierHelper
  *
@@ -7,24 +10,16 @@ App::uses('Purifier', 'HtmlPurifier.Lib');
  * @copyright 2012 Florian Krämer
  * @license MIT
  */
-class HtmlPurifierHelper extends AppHelper {
+class HtmlPurifierHelper extends Helper {
+
 /**
- * Settings
+ * Default config
  *
  * @var array
  */
-	public $settings = array();
-
-/**
- * Constructor - determines engine helper
- *
- * @param View $View the view object the helper is attached to.
- * @param array $settings Settings array contains name of engine helper.
- */
-	public function __construct(View $View, $settings = array()) {
-		$this->settings = $settings;
-		parent::__construct($View, $settings);
-	}
+	public $_defaultConfig = [
+		'config' => ''
+	];
 
 /**
  * Clean markup
@@ -34,11 +29,9 @@ class HtmlPurifierHelper extends AppHelper {
  * @return string
  */
 	public function clean($markup, $config = null) {
-		if (empty($config) && !empty($this->settings['config'])) {
+		if (empty($config) && !empty($this->_config['config'])) {
 			$config = $this->settings['config'];
 		}
-
 		return Purifier::clean($markup, $config);
 	}
-
 }

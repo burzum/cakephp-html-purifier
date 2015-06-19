@@ -1,4 +1,9 @@
-# CakePHP HTML Purifier Plugin
+CakePHP HTML Purifier Plugin
+----------------------------
+
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.txt) 
+[![Build Status](https://img.shields.io/travis/burzum/cakephp-html-purifier/master.svg?style=flat-square)](https://travis-ci.org/burzum/cakephp-html-purifier) 
+[![Build Status](https://img.shields.io/coveralls/burzum/cakephp-html-purifier/master.svg?style=flat-square)](https://coveralls.io/r/burzum/cakephp-html-purifier)
 
 This is a CakePHP wrapper for the HTML Purifier lib. http://htmlpurifier.org/
 
@@ -6,24 +11,35 @@ HTML Purifier is a standards-compliant HTML filter library written in PHP. HTML 
 
 The plugin includes a Helper and Behavior to clean your markup wherever you like, in the view or in Model::beforeSave.
 
-## Support
+Documentation
+-------------
 
-For support and feature request, please visit the HtmlPurifier issue page
+For documentation, as well as tutorials, see the [docs](docs/Home.md) directory of this repository.
 
-https://github.com/burzum/HtmlPurifier/issues
+Support
+-------
 
-Contributing
-------------
+For support and feature request, please visit the [UserTools Support Site](https://github.com/burzum/cakephp-user-tools/issues).
 
-To contribute to this plugin please follow a few basic rules.
+Branch strategy
+-------------
+
+* The **master** branch holds the `STABLE` latest version of the plugin.
+* The **develop** branch is `UNSTABLE` and used to test new features before releasing them.
+* Only **hot fixes** are accepted against the master branch.
+
+Contributing to this Plugin
+---------------------------
+
+Please feel free to contribute to the plugin with new issues, requests, unit tests and code fixes or new features. If you want to contribute some code, create a feature branch from develop, and send us your pull request. Unit tests for new features and issues detected are mandatory to keep quality high.
 
 * Pull requests must be send to the ```develop``` branch.
-* Contributions must follow the [CakePHP coding standard](http://book.cakephp.org/2.0/en/contributing/cakephp-coding-conventions.html).
-* [Unit tests](http://book.cakephp.org/2.0/en/development/testing.html) are required.
+* Contributions must follow the [PSR2-**R** coding standard recommendation](https://github.com/php-fig-rectified/fig-rectified-standards).
+* [Unit tests](http://book.cakephp.org/3.0/en/development/testing.html) are required.
 
-## License
+License
+-------
 
-Copyright 2012 - 2014, Florian Krämer
+Copyright 2013 - 2015 Florian Krämer
 
-Licensed under The MIT License
-Redistributions of files must retain the above copyright notice.
+Licensed under the [MIT](http://www.opensource.org/licenses/mit-license.php) License. Redistributions of the source code included in this repository must retain the copyright notice found in each file.
