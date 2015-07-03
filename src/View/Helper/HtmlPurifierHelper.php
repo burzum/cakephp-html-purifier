@@ -1,9 +1,4 @@
 <?php
-namespace Burzum\HtmlPurifier\View\Helper;
-
-use Burzum\HtmlPurifier\Lib\Purifier;
-use Cake\View\Helper;
-
 /**
  * HtmlPurifierHelper
  *
@@ -11,6 +6,11 @@ use Cake\View\Helper;
  * @copyright 2012 - 2015 Florian Krämer
  * @license MIT
  */
+namespace Burzum\HtmlPurifier\View\Helper;
+
+use Burzum\HtmlPurifier\Lib\Purifier;
+use Cake\View\Helper;
+
 class HtmlPurifierHelper extends Helper {
 
 /**

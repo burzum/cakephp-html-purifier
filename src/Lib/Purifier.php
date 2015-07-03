@@ -1,6 +1,4 @@
 <?php
-namespace Burzum\HtmlPurifier\Lib;
-
 /**
  * Purifier
  *
@@ -8,6 +6,8 @@ namespace Burzum\HtmlPurifier\Lib;
  * @copyright 2012 - 2015 Florian Krämer
  * @license MIT
  */
+namespace Burzum\HtmlPurifier\Lib;
+
 class Purifier {
 
     /**
@@ -39,11 +39,12 @@ class Purifier {
     }
 
     /**
-     * Config
+     * Gets and sets purifier configuration sets.
      *
      * @param string $configName
      * @param string $config
      * @throws \InvalidArgumentException
+     * @return \HTMLPurifier
      */
     public static function config($configName, $config = null)
     {

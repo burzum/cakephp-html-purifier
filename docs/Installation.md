@@ -1,16 +1,11 @@
 Installation
-------------
+============
 
-Clone the code into your apps plugin folder
+Using Composer
+--------------
 
-	git clone git@github.com:burzum/cakephp-html-purifier.git app/Plugin/HtmlPurifier
+Installing the plugin via [Composer](https://getcomposer.org/) is very simple, just run this in your project folder:
 
-or add it as submodule
-
-	git submodule add git@github.com:burzum/cakephp-html-purifier.git app/Plugin/HtmlPurifier
-
-In your config/bootstrap.php add
-
-```php
-Plugin::load('Burzum/HtmlPurifier', ['bootstrap' => true]);
+```sh
+composer require burzum/cakephp-html-purifier:3.0.*@dev
 ```
