@@ -1,4 +1,9 @@
-# CakePHP HTML Purifier Plugin
+CakePHP HTML Purifier Plugin
+----------------------------
+
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.txt) 
+[![Build Status](https://img.shields.io/travis/burzum/cakephp-html-purifier/master.svg?style=flat-square)](https://travis-ci.org/burzum/cakephp-html-purifier) 
+[![Build Status](https://img.shields.io/coveralls/burzum/cakephp-html-purifier/master.svg?style=flat-square)](https://coveralls.io/r/burzum/cakephp-html-purifier)
 
 This is a CakePHP wrapper for the HTML Purifier lib. http://htmlpurifier.org/
 
@@ -6,153 +11,35 @@ HTML Purifier is a standards-compliant HTML filter library written in PHP. HTML 
 
 The plugin includes a Helper and Behavior to clean your markup wherever you like, in the view or in Model::beforeSave.
 
-## Setup
+Documentation
+-------------
 
-Clone the code into your apps plugin folder
+For documentation, as well as tutorials, see the [docs](docs/Home.md) directory of this repository.
 
-	git clone git@github.com:burzum/cakephp-html-purifier.git app/Plugin/HtmlPurifier
+Support
+-------
 
-or add it as submodule
+For support and feature request, please visit the [UserTools Support Site](https://github.com/burzum/cakephp-user-tools/issues).
 
-	git submodule add git@github.com:burzum/cakephp-html-purifier.git app/Plugin/HtmlPurifier
+Branch strategy
+-------------
 
-In APP/bootstrap.php add
+* The **master** branch holds the `STABLE` latest version of the plugin.
+* The **develop** branch is `UNSTABLE` and used to test new features before releasing them.
+* Only **hot fixes** are accepted against the master branch.
 
-```php
-CakePlugin::load('HtmlPurifier', array('bootstrap' => true));
-```
+Contributing to this Plugin
+---------------------------
 
-## Usage
-
-### If you use APC ...
-
-...and get this error message
-
-	Fatal error: Cannot override final method HTMLPurifier_VarParser::parse()
-
-you can fix this by adding
-
-```php
-Configure::write(''HtmlPurifier.standalone', true);
-```
-
-to your bootstrap.php *before* you load this plugin.
-
-This line will use a compacted one file version of Html Purifier. This is an official and know issue and workaround, see http://htmlpurifier.org/phorum/read.php?3,4099,6680.
-
-### Configuration
-
-Important: Before you start declaring a configuration you should lookup how HTML Purifier can be configured. http://htmlpurifier.org/docs
-
-In app/Config/boostrap.php you can either set the purifier config as an array or pass a native config object.
-
-The array style would look like this:
-
-```php
-Purifier::config('ConfigName', array(
-		'HTML.AllowedElements' => 'a, em, blockquote, p, strong, pre, code, span,ul,ol,li,img',
-		'HTML.AllowedAttributes' => 'a.href, a.title, img.src, img.alt'
-	)
-);
-```
-
-The plugin will construct a HTML Purifier config from that and instantiate the purifier.
-
-A pure HTML Purifier config might look like this one:
-
-```php
-$config = HTMLPurifier_Config::createDefault();
-$config->set('HTML.AllowedElements', 'a, em, blockquote, p, strong, pre, code, span,ul,ol,li,img');
-$config->set('HTML.AllowedAttributes', 'a.href, a.title, img.src, img.alt, *.style');
-$config->set('CSS.AllowedProperties', 'text-decoration');
-$config->set('HTML.TidyLevel', 'heavy');
-$config->set('HTML.Doctype', 'XHTML 1.0 Transitional');
-```
-
-Simply assign it to a config:
-
-```php
-Purifier::config('ConfigName', $config);
-```
-
-Now that you have a configured instance of HTML Purifier ready you can use it directly and get you an instance of the purifier
-
-```php
-Purifier::config('ConfigName');
-```
-
-or clean some dirty HTML directly by calling
-
-```php
-Purifier::clean($markup, 'ConfigName');
-```
-
-For some automatization you can also use the Behavior or Helper.
-
-### Caching ###
-
-It is recommended to change the path of the purifier libs cache to your APP/tmp folder. For example:
-
-```php
-Purifier::config('ConfigName', array(
-		'Cache.SerializerPath' => APP . 'tmp' . DS . 'purifier',
-	)
-);
-```
-
-See this page as well http://htmlpurifier.org/live/configdoc/plain.html#Cache.
-
-### The Behavior
-
-Set a config you want to use and the fields you want to sanitize.
-
-```php
-public $actsAs = array(
-	'HtmlPurifier.HtmlPurifier' => array(
-		'config' => 'ConfigName',
-		'fields' => array(
-			'body', 'excerpt'
-		)
-	)
-);
-```
-
-### The Helper
-
-In your controller load the helper and set a default config if you want.
-
-```php
-public $helpers = array(
-	'HtmlPurifier.HtmlPurifier' => array(
-		'config' => 'ConfigName'
-	)
-);
-```
-
-In the views you can then use the helper like this:
-
-```php
-$this->HtmlPurifier->clean($markup, 'ConfigName');
-```
-
-## Support
-
-For support and feature request, please visit the HtmlPurifier issue page
-
-https://github.com/burzum/HtmlPurifier/issues
-
-Contributing
-------------
-
-To contribute to this plugin please follow a few basic rules.
+Please feel free to contribute to the plugin with new issues, requests, unit tests and code fixes or new features. If you want to contribute some code, create a feature branch from develop, and send us your pull request. Unit tests for new features and issues detected are mandatory to keep quality high.
 
 * Pull requests must be send to the ```develop``` branch.
-* Contributions must follow the [CakePHP coding standard](http://book.cakephp.org/2.0/en/contributing/cakephp-coding-conventions.html).
-* [Unit tests](http://book.cakephp.org/2.0/en/development/testing.html) are required.
+* Contributions must follow the [PSR2-**R** coding standard recommendation](https://github.com/php-fig-rectified/fig-rectified-standards).
+* [Unit tests](http://book.cakephp.org/3.0/en/development/testing.html) are required.
 
-## License
+License
+-------
 
-Copyright 2012 - 2014, Florian Krämer
+Copyright 2013 - 2015 Florian Krämer
 
-Licensed under The MIT License
-Redistributions of files must retain the above copyright notice.
+Licensed under the [MIT](http://www.opensource.org/licenses/mit-license.php) License. Redistributions of the source code included in this repository must retain the copyright notice found in each file.
