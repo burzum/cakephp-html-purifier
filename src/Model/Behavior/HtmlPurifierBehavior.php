@@ -6,7 +6,7 @@
  * @copyright 2012 - 2015 Florian Krämer
  * @license MIT
  */
-namespace App\Model\Behavior;
+namespace Burzum\HtmlPurifier\Model\Behavior;
 
 use ArrayObject;
 use Burzum\HtmlPurifier\Lib\PurifierTrait;
