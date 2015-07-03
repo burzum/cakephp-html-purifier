@@ -1,6 +1,8 @@
-# Usage
+Usage
+=====
 
-### If you use APC ...
+If you use APC ...
+------------------
 
 ...and get this error message
 
@@ -9,18 +11,19 @@
 you can fix this by adding
 
 ```php
-Configure::write(''HtmlPurifier.standalone', true);
+Configure::write('HtmlPurifier.standalone', true);
 ```
 
 to your bootstrap.php *before* you load this plugin.
 
 This line will use a compacted one file version of Html Purifier. This is an official and know issue and workaround, see http://htmlpurifier.org/phorum/read.php?3,4099,6680.
 
-### Configuration
+Configuration
+-------------
 
 Important: Before you start declaring a configuration you should lookup how HTML Purifier can be configured. http://htmlpurifier.org/docs
 
-In app/Config/boostrap.php you can either set the purifier config as an array or pass a native config object.
+In `config/boostrap.php` you can either set the purifier config as an array or pass a native config object.
 
 The array style would look like this:
 
@@ -68,11 +71,11 @@ For some automatization you can also use the Behavior or Helper.
 
 ### Caching ###
 
-It is recommended to change the path of the purifier libs cache to your APP/tmp folder. For example:
+It is recommended to change the path of the purifier libs cache to your `tmp` folder. For example:
 
 ```php
 Purifier::config('ConfigName', array(
-		'Cache.SerializerPath' => APP . 'tmp' . DS . 'purifier',
+		'Cache.SerializerPath' => ROOT . DS . 'tmp' . DS . 'purifier',
 	)
 );
 ```
@@ -85,7 +88,7 @@ Set a config you want to use and the fields you want to sanitize.
 
 ```php
 public $actsAs = array(
-	'HtmlPurifier.HtmlPurifier' => array(
+	'Burzum/HtmlPurifier.HtmlPurifier' => array(
 		'config' => 'ConfigName',
 		'fields' => array(
 			'body', 'excerpt'
@@ -100,7 +103,7 @@ In your controller load the helper and set a default config if you want.
 
 ```php
 public $helpers = array(
-	'HtmlPurifier.HtmlPurifier' => array(
+	'Burzum/HtmlPurifier.HtmlPurifier' => array(
 		'config' => 'ConfigName'
 	)
 );
