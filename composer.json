@@ -2,7 +2,7 @@
 	"name": "burzum/cakephp-html-purifier",
 	"type": "cakephp-plugin",
 	"description": "HtmlPurifier plugin for CakePHP",
-	"keywords": ["html", "sensitization", "purifier", "validation", "tidy", "markup"],
+	"keywords": ["html", "sanitize", "purifier", "validation", "tidy", "markup"],
 	"homepage": "http://github.com/burzum/cakephp-html-purifier",
 	"license": "MIT",
 	"authors": [
@@ -16,6 +16,18 @@
 		"php": ">=5.3.2",
 		"ezyang/htmlpurifier": "*",
 		"composer/installers": "*"
+	},
+	"autoload": {
+		"psr-4": {
+			"Burzum\\HtmlPurifier\\": "src",
+			"Burzum\\HtmlPurifier\\Test\\Fixture\\": "tests\\Fixture"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Cake\\Test\\": "/vendor/cakephp/cakephp/tests",
+			"Burzum\\HtmlPurifier\\Test\\": "tests"
+		}
 	},
 	"extra": {
 		"installer-name": "HtmlPurifier"
