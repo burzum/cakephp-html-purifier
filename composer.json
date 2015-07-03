@@ -15,5 +15,8 @@
 	"require": {
 		"cakephp/cakephp": "~3.0",
 		"ezyang/htmlpurifier": "*"
+	},
+	"scripts": {
+		"post-autoload-dump": "Cake\\Composer\\Installer\\PluginInstaller::postAutoloadDump"
 	}
 }
