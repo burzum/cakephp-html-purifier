@@ -15,14 +15,14 @@ class Purifier {
      *
      * @var array
      */
-    protected $_configs = array();
+    protected $_configs = [];
 
     /**
      * HTMLPurifier instances
      *
      * @var array
      */
-    protected $_instances = array();
+    protected $_instances = [];
 
     /**
      * Return a singleton instance of the StorageManager.
@@ -31,7 +31,7 @@ class Purifier {
      */
     public static function &getInstance()
     {
-        static $instance = array();
+        static $instance = [];
         if (!$instance) {
             $instance[0] = new Purifier();
         }
