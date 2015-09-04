@@ -13,5 +13,5 @@ composer require burzum/cakephp-html-purifier:~2.0
 In your `config/bootstrap.php`
 
 ```php
-Plugin::load('Burzum/HtmlPurifier.HtmlPurifier');
+Plugin::load('Burzum/HtmlPurifier');
 ```
