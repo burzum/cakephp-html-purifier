@@ -23,11 +23,14 @@ Configuration
 
 Important: Before you start declaring a configuration you should lookup how HTML Purifier can be configured. http://htmlpurifier.org/docs
 
-In `config/boostrap.php` you can either set the purifier config as an array or pass a native config object.
+In `config/bootstrap.php` you can either set the purifier config as an array or pass a native config object.
 
 The array style would look like this:
 
 ```php
+// Don't forget to add the `use` statement
+use Burzum\HtmlPurifier\Lib\Purifier;
+
 Purifier::config('ConfigName', array(
 		'HTML.AllowedElements' => 'a, em, blockquote, p, strong, pre, code, span,ul,ol,li,img',
 		'HTML.AllowedAttributes' => 'a.href, a.title, img.src, img.alt'
