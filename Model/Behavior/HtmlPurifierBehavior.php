@@ -62,11 +62,50 @@ class HtmlPurifierBehavior extends ModelBehavior {
  * @return boolean
  */
 	public function beforeValidate(Model $Model, $options = array()) {
-		if ($this->settings[$Model->alias]['purifyOn'] === 'afterSave') {
+		if ($this->settings[$Model->alias]['purifyOn'] === 'beforeValidate') {
 			$Model->data = $this->cleanFields($Model, $Model->data);
 		}
 		return true;
 	}
+/**
+ * afterFind
+ * @param Model $Model
+ * @param type $results
+ * @param type $primary
+ * @return array
+ */
+        public function afterFind(Model $Model, $results, $primary = false) {
+            if (($primary || $Model->useConsistentAfterFind) && $this->settings[$Model->alias]['purifyOn'] === 'afterFind') {
+                foreach($results as $index => $result){
+                    $results[$index] = $this->cleanFields($Model, $result);
+                }
+            }
+            return $results;
+        }
+/**
+ * afterValidate
+ * @param Model $Model
+ * @return boolean
+ */
+        public function afterValidate(Model $Model) {
+            if ($this->settings[$Model->alias]['purifyOn'] === 'afterValidate') {
+                    $Model->data = $this->cleanFields($Model, $Model->data);
+            }
+            return true;
+        }
+        /**
+         * afterSave
+         * @param Model $Model
+         * @param type $created
+         * @param type $options
+         * @return boolean
+         */
+        public function afterSave(Model $Model, $created, $options = array()) {
+            if ($this->settings[$Model->alias]['purifyOn'] === 'afterSave') {
+                    $Model->data = $this->cleanFields($Model, $Model->data);
+            }
+            return true;
+        }
 
 /**
  * Cleans fields of a record
@@ -80,10 +119,10 @@ class HtmlPurifierBehavior extends ModelBehavior {
  */
 	public function cleanFields(Model $Model, $data = array(), $options = array()) {
 		extract(Hash::merge($this->settings[$Model->alias], $options));
-		foreach($fields as $field) {
-			if (isset($data[$Model->alias][$field])) {
-				$data[$Model->alias][$field] = $this->purifyHtml($Model, $data[$Model->alias][$field], $purifierConfig);
-			}
+		foreach($this->settings[$Model->alias]['fields'] as $field) {
+                    if (isset($data[$Model->alias][$field])) {
+                        $data[$Model->alias][$field] = $this->purifyHtml($Model, $data[$Model->alias][$field], $purifierConfig);
+                    }
 		}
 		return $data;
 	}
