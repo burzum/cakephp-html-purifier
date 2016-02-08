@@ -1,8 +1,6 @@
-Installation
-============
+# Installation
 
-Using Composer
---------------
+## Using Composer
 
 Installing the plugin via [Composer](https://getcomposer.org/) is very simple, just run this in your project folder:
 
