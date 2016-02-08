@@ -9,7 +9,7 @@ This is a CakePHP wrapper for the HTML Purifier lib. http://htmlpurifier.org/
 
 HTML Purifier is a standards-compliant HTML filter library written in PHP. HTML Purifier will not only remove all malicious code (better known as XSS) with a thoroughly audited, secure yet permissive whitelist, it will also make sure your documents are standards compliant, something only achievable with a comprehensive knowledge of W3C's specifications.
 
-The plugin includes a Helper and Behavior to clean your markup wherever you like, in the view or in Model::beforeSave.
+The plugin includes a Helper, Behavior and a Shell to clean your markup wherever you like, in the view or in Model::beforeMarshall().
 
 ---
 

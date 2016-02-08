@@ -18,9 +18,9 @@ class HtmlPurifierHelper extends Helper {
  *
  * @var array
  */
-	public $_defaultConfig = [
-		'config' => ''
-	];
+    public $_defaultConfig = [
+        'config' => 'default'
+    ];
 
 /**
  * Clean markup
@@ -29,10 +29,11 @@ class HtmlPurifierHelper extends Helper {
  * @param string $config
  * @return string
  */
-	public function clean($markup, $config = null) {
-		if (empty($config) && !empty($this->_config['config'])) {
-			$config = $this->settings['config'];
-		}
-		return Purifier::clean($markup, $config);
-	}
+    public function clean($markup, $config = null)
+    {
+        if (empty($config) && !empty($this->_config['config'])) {
+            $config = $this->config('config');
+        }
+        return Purifier::clean($markup, $config);
+    }
 }
