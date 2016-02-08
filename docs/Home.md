@@ -8,5 +8,5 @@ Documentation
 
 * [Installation](Documentation/Installation.md)
 * [Configuration](Documentation/Configuration.md)
-* [If you use APC](If-you-use-APC.md)
+* [If you use APC](Documentation/If-you-use-APC.md)
 
