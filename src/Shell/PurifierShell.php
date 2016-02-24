@@ -3,124 +3,177 @@
  * Purifier Shell
  *
  * @author Florian Krämer
- * @copyright 2012 - 2015 Florian Krämer
+ * @copyright 2012 - 2016 Florian Krämer
  * @license MIT
  */
 namespace Burzum\HtmlPurifier\Shell;
 
+use Cake\Console\ConsoleOptionParser;
 use Cake\Console\Shell;
 use Cake\ORM\Table;
 use Cake\ORM\TableRegistry;
 
 class PurifierShell extends Shell {
 
-	public function main() {}
+    /**
+     * Main entry point
+     *
+     * @return void
+     */
+    public function main()
+    {
+        $this->purify();
+    }
 
-	/**
-	 * Purifies data base content.
-	 */
-	public function purify() {
-		$table = TableRegistry::get($this->param('table'));
+    /**
+     * Gets the table from the shell args.
+     *
+     * @return \Cake\ORM\Table;
+     */
+    protected function _getTable()
+    {
+        $table = TableRegistry::get($this->args[0]);
+        $connection = $table->connection();
+        $tables = $connection->schemaCollection()->listTables();
+        if (!in_array($this->args[0], $tables)) {
+            $this->abort(__d('Burzum/HtmlPurifier', 'Table `{0}` does not exist in connection `{1}`!', $this->args[0], $connection->configName()));
+        }
+    }
 
-		$fields = explode(',', $this->param('fields'));
-		foreach ($fields as $field) {
-			if (!$table->hasField($field)) {
-				$this->abort(sprintf('Table `%s` is missing the field `%s`.', $table->table(), $field));
-			}
-		}
+    /**
+     * Gets the field(s) from the args and checks if they're present in the table.
+     *
+     * @param \Cake\ORM\Table $table Table object.
+     * @return array Set of of fields explode()'ed from the args
+     */
+    protected function _getFields(Table $table)
+    {
+        $fields = explode(',', $this->args[1]);
+        foreach ($fields as $field) {
+            if (!$table->hasField($field)) {
+                $this->abort(sprintf('Table `%s` is missing the field `%s`.', $table->table(), $field));
+            }
+        }
+        return $fields;
+    }
 
-		if (!in_array('HtmlPurifier', $table->behaviors()->loaded())) {
-			$table->addBehavior('Burzum/HtmlPurifier.HtmlPurifier', [
-				'fields' => explode(',', $this->param('fields')),
-				'purifierConfig' => $this->param('config')
-			]);
-		}
+    /**
+     * Loads the purifier behavior for the given table if not already attached.
+     *
+     * @param \Cake\ORM\Table $table Table object.
+     * @param array Set of fields to sanitize
+     * @return void
+     */
+    protected function _loadBehavior(Table $table, $fields)
+    {
+        if (!in_array('HtmlPurifier', $table->behaviors()->loaded())) {
+            $table->addBehavior('Burzum/HtmlPurifier.HtmlPurifier', [
+                'fields' => $fields,
+                'purifierConfig' => $this->param('config')
+            ]);
+        }
+    }
 
-		$query = $table->find();
-		if ($table->hasFinder('purifier')) {
-			$query->find('purifier');
-		}
-		$total = $query->all()->count();
+    /**
+     * Purifies data base content.
+     *
+     * @return void
+     */
+    public function purify()
+    {
+        $table = $this->_getTable();
+        $fields = $this->_getFields($table);
+        $this->_loadBehavior($table, $fields);
 
-		$this->out(sprintf('Sanitizing fields `%s` in table `%s`', implode(',', $fields), $table->table()));
+        $query = $table->find();
+        if ($table->hasFinder('purifier')) {
+            $query->find('purifier');
+        }
+        $total = $query->all()->count();
 
-		$this->helper('progress')->output([
-			'total' => $total,
-			'callback' => function($progress) use ($total, $table) {
-				$chunkSize = 25;
-				$chunkCount = 0;
-				while ($chunkCount <= $total) {
-					$this->_process($table, $chunkCount, $chunkSize);
-					$chunkCount = $chunkCount + $chunkSize;
-					$progress->increment($chunkSize);
-					$progress->draw();
-				}
-				return;
-			}
-		]);
-	}
+        $this->info(__d('Burzum/HtmlPurifier', 'Sanitizing fields `{0}` in table `{1}`', implode(',', $fields), $table->table()));
 
-	/**
-	 * Processes the records.
-	 *
-	 * @param \Cake\ORM\Table $table
-	 * @param int $chunkCount
-	 * @param int $chunkSize
-	 * @return void
-	 */
-	protected function _process(Table $table, $chunkCount, $chunkSize) {
-		$query = $table->find();
-		if ($table->hasFinder('purifier')) {
-			$query->find('purifier');
-		}
+        $this->helper('progress')->output([
+            'total' => $total,
+            'callback' => function ($progress) use ($total, $table) {
+                $chunkSize = 25;
+                $chunkCount = 0;
+                while ($chunkCount <= $total) {
+                    $this->_process($table, $chunkCount, $chunkSize);
+                    $chunkCount = $chunkCount + $chunkSize;
+                    $progress->increment($chunkSize);
+                    $progress->draw();
+                }
+                return;
+            }
+        ]);
+    }
 
-		$fields = explode(',', $this->param('fields'));
-		$fields[] = $table->primaryKey();
+    /**
+     * Processes the records.
+     *
+     * @param \Cake\ORM\Table $table
+     * @param int $chunkCount
+     * @param int $chunkSize
+     * @return void
+     */
+    protected function _process(Table $table, $chunkCount, $chunkSize) {
+        $query = $table->find();
+        if ($table->hasFinder('purifier')) {
+            $query->find('purifier');
+        }
 
-		$results = $query
-			->select($fields)
-			->offset($chunkCount)
-			->limit($chunkSize)
-			->orderDesc($table->aliasField($table->primaryKey()))
-			->all();
+        $fields = explode(',', $this->param('fields'));
+        $fields[] = $table->primaryKey();
 
-		if (empty($results)) {
-			return;
-		}
+        $results = $query
+            ->select($fields)
+            ->offset($chunkCount)
+            ->limit($chunkSize)
+            ->orderDesc($table->aliasField($table->primaryKey()))
+            ->all();
 
-		foreach ($results as $result) {
-			try {
-				$table->save($result);
-				$chunkCount++;
-			} catch (\Exception $e) {
-				$this->error($e->getMessage());
-			}
-		}
-	}
+        if (empty($results)) {
+            return;
+        }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getOptionParser() {
-		$parser = parent::getOptionParser();
+        foreach ($results as $result) {
+            try {
+                $table->save($result);
+                $chunkCount++;
+            } catch (\Exception $e) {
+                $this->error($e->getMessage());
+            }
+        }
+    }
 
-		$parser->addArgument('purify', [
-			'help' => 'Purifies fields in a table.'
-		]);
+    /**
+     * {@inheritDoc}
+     */
+    public function getOptionParser() {
+        $parser = parent::getOptionParser();
 
-		$parser->addOption('fields', [
-			'short' => 'f',
-			'help' => __('The field(s) to purify, comma separated.'),
-			'required' => true
-		])->addOption('table', [
-			'short' => 't',
-			'help' => __('The table you want to use.'),
-			'required' => true
-		])->addOption('config', [
-			'short' => 'c',
-			'help' => __('The purifier config you want to use.'),
-			'default' => 'default'
-		]);
-		return $parser;
-	}
+        $parser->description([
+            __d('Burzum/HtmlPurifier', 'This shell allows you to clean database content with the HTML Purifier.'),
+        ]);
+
+        $parser->addArguments([
+            'table' => [
+                'help' => __d('Burzum/HtmlPurifier', 'The table to sanitize'),
+                'required' => true,
+            ],
+            'fields' => [
+                'help' => __d('Burzum/HtmlPurifier', 'The field(s) to purify, comma separated'),
+                'required' => true,
+            ],
+        ]);
+
+        $parser->addOption('config', [
+            'short' => 'c',
+            'help' => __d('Burzum/HtmlPurifier', 'The purifier config you want to use'),
+            'default' => 'default'
+        ]);
+
+        return $parser;
+    }
 }
