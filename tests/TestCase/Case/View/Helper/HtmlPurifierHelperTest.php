@@ -9,18 +9,18 @@ use Burzum\HtmlPurifier\View\Helper\HtmlPurifierHelper;
 
 class HtmlHelperTest extends TestCase {
 
-/**
- * Purifier property
- *
- * @var object
- */
+    /**
+     * Purifier property
+     *
+     * @var object
+     */
     public $Purifier = null;
 
-/**
- * setUp method
- *
- * @return void
- */
+    /**
+     * setUp method
+     *
+     * @return void
+     */
     public function setUp()
     {
         parent::setUp();
@@ -36,22 +36,22 @@ class HtmlHelperTest extends TestCase {
         ]);
     }
 
-/**
- * tearDown method
- *
- * @return void
- */
+    /**
+     * tearDown method
+     *
+     * @return void
+     */
     public function tearDown()
     {
         parent::tearDown();
         unset($this->Purifier, $this->View);
     }
 
-/**
- * testCleanSomeTinyMceOutput
- *
- * @return void
- */
+    /**
+     * testCleanSomeTinyMceOutput
+     *
+     * @return void
+     */
     public function testCleanSomeTinyMceOutput()
     {
         $html = '<p style="font-weight: bold;"><script>alert("alert!");</script><span style="text-decoration: line-through;" _mce_style="text-decoration: line-through;">shsfhshs</span></p><p><strong>sdhsdhds</strong></p><p><em>shsdh</em><span style="text-decoration: underline;" _mce_style="text-decoration: underline;">dsh</span></p><ul><li>sdgsgssgd</li><li>sdgdsg</li><li>sdgsdgsg</li><li>sdgdg<br></li></ul>';
