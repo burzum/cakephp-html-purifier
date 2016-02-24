@@ -102,7 +102,7 @@ class Purifier {
         $_this = Purifier::getInstance();
 
         if (!isset($_this->_configs[$configName])) {
-            throw new \InvalidArgumentException(sprintf('Invalid configuration %s!', $configName));
+            throw new \InvalidArgumentException(sprintf('Invalid HtmlPurifier configuration "%s"!', $configName));
         }
 
         return $_this->getPurifierInstance($configName)->purify($markup);
