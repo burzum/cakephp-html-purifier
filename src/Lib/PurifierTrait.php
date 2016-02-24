@@ -16,7 +16,7 @@ trait PurifierTrait {
      * @param string $markup
      * @param string $config
      */
-    public function purifyHtml($markup, $config = '')
+    public function purifyHtml($markup, $config = 'default')
     {
         return Purifier::clean($markup, $config);
     }
