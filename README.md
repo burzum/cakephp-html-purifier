@@ -23,13 +23,13 @@ For documentation, as well as tutorials, see the [docs](docs/Home.md) directory 
 Support
 -------
 
-For support and feature request, please visit the [UserTools Support Site](https://github.com/burzum/cakephp-user-tools/issues).
+For support and feature request, please visit the [Support Site](https://github.com/burzum/cakephp-html-purifier/issues).
 
 Branch strategy
 -------------
 
 * The **master** branch holds the `STABLE` latest version of the plugin.
-* The **develop** branch is `UNSTABLE` and used to test new features before releasing them.
+* The **2.0** branch is `UNSTABLE` and used to test new features before releasing them.
 * Only **hot fixes** are accepted against the master branch.
 
 Contributing to this Plugin
