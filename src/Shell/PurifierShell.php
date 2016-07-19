@@ -99,7 +99,7 @@ class PurifierShell extends Shell {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @inheritDoc
 	 */
 	public function getOptionParser() {
 		$parser = parent::getOptionParser();
