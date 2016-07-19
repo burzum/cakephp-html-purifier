@@ -1,7 +1,6 @@
 <?php
 namespace Burzum\HtmlPurifier\Test\TestCase\View\Helper;
 
-use Cake\Controller\Controller;
 use Cake\TestSuite\TestCase;
 use Cake\View\View;
 use Burzum\HtmlPurifier\Lib\Purifier;
@@ -58,5 +57,4 @@ class HtmlHelperTest extends TestCase {
         $html = $this->Purifier->clean($html, 'default');
         $this->assertEquals($html, '<p><span style="text-decoration:line-through;">shsfhshs</span></p><p><strong>sdhsdhds</strong></p><p><em>shsdh</em><span style="text-decoration:underline;">dsh</span></p><ul><li>sdgsgssgd</li><li>sdgdsg</li><li>sdgsdgsg</li><li>sdgdg</li></ul>');
     }
-
 }

@@ -117,7 +117,8 @@ class PurifierShell extends Shell {
      * @param int $chunkSize
      * @return void
      */
-    protected function _process(Table $table, $chunkCount, $chunkSize) {
+    protected function _process(Table $table, $chunkCount, $chunkSize)
+    {
         $query = $table->find();
         if ($table->hasFinder('purifier')) {
             $query->find('purifier');
@@ -150,7 +151,8 @@ class PurifierShell extends Shell {
     /**
      * {@inheritDoc}
      */
-    public function getOptionParser() {
+    public function getOptionParser()
+    {
         $parser = parent::getOptionParser();
 
         $parser->description([
