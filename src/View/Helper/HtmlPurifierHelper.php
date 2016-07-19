@@ -3,7 +3,7 @@
  * HtmlPurifierHelper
  *
  * @author Florian Krämer
- * @copyright 2012 - 2015 Florian Krämer
+ * @copyright 2012 - 2016 Florian Krämer
  * @license MIT
  */
 namespace Burzum\HtmlPurifier\View\Helper;
@@ -13,22 +13,22 @@ use Cake\View\Helper;
 
 class HtmlPurifierHelper extends Helper {
 
-/**
- * Default config
- *
- * @var array
- */
+    /**
+     * Default config
+     *
+     * @var array
+     */
     public $_defaultConfig = [
         'config' => 'default'
     ];
 
-/**
- * Clean markup
- *
- * @param string $markup
- * @param string $config
- * @return string
- */
+    /**
+     * Clean markup
+     *
+     * @param string $markup
+     * @param string $config
+     * @return string
+     */
     public function clean($markup, $config = null)
     {
         if (empty($config) && !empty($this->_config['config'])) {

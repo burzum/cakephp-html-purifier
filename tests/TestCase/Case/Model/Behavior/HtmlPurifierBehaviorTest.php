@@ -3,7 +3,7 @@
  * Upload Validator Behavior Test
  *
  * @author Florian Krämer
- * @copyright 2012 - 2015 Florian Krämer
+ * @copyright 2012 - 2016 Florian Krämer
  * @license MIT
  */
 namespace Burzum\HtmlPurifier\Test\TestCase\Model\Behavior;
@@ -54,18 +54,18 @@ class VoidModel extends Table {
  */
 class HtmlPurifierBehaviorTest extends TestCase {
 
-/**
- * Fixtures
- *
- * @var array
- */
+    /**
+     * Fixtures
+     *
+     * @var array
+     */
     public $fixtures = [];
 
-/**
- * startTest
- *
- * @return void
- */
+    /**
+     * startTest
+     *
+     * @return void
+     */
     public function setUp()
     {
         parent::setUp();
@@ -81,21 +81,21 @@ class HtmlPurifierBehaviorTest extends TestCase {
         $this->table = new VoidModel();
     }
 
-/**
- * endTest
- *
- * @return void
- */
+    /**
+     * endTest
+     *
+     * @return void
+     */
     public function tearDown()
     {
         unset($this->table);
     }
 
-/**
- * configureUploadValidation
- *
- * @return void
- */
+    /**
+     * testBeforeMarshal
+     *
+     * @return void
+     */
     public function testBeforeMarshal()
     {
         $html = '<p style="font-weight: bold;"><script>alert("alert!");</script><span style="text-decoration: line-through;" _mce_style="text-decoration: line-through;">shsfhshs</span></p><p><strong>sdhsdhds</strong></p><p><em>shsdh</em><span style="text-decoration: underline;" _mce_style="text-decoration: underline;">dsh</span></p><ul><li>sdgsgssgd</li><li>sdgdsg</li><li>sdgsdgsg</li><li>sdgdg<br></li></ul>';

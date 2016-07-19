@@ -3,7 +3,7 @@
  * Purifier
  *
  * @author Florian Krämer
- * @copyright 2012 - 2015 Florian Krämer
+ * @copyright 2012 - 2016 Florian Krämer
  * @license MIT
  */
 namespace Burzum\HtmlPurifier\Lib;
@@ -77,7 +77,7 @@ class Purifier {
      * @param string $configName
      * @return HTMLPurifier
      */
-    public static function getPurifierInstance($configName = null)
+    public static function getPurifierInstance($configName = 'default')
     {
         $_this = Purifier::getInstance();
 
@@ -97,7 +97,7 @@ class Purifier {
      * @param string $markup
      * @param string $configName
      */
-    public static function clean($markup, $configName = null)
+    public static function clean($markup, $configName = 'default')
     {
         $_this = Purifier::getInstance();
 
