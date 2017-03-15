@@ -33,7 +33,7 @@ CakePlugin::load('HtmlPurifier', array('bootstrap' => true));
 you can fix this by adding
 
 ```php
-Configure::write(''HtmlPurifier.standalone', true);
+Configure::write('HtmlPurifier.standalone', true);
 ```
 
 to your bootstrap.php *before* you load this plugin.
