@@ -40,13 +40,13 @@ class VoidModel extends Table {
      * @param array $config
      * @return void
      */
-        public function initialize(array $config)
-        {
-            parent::initialize($config);
-            $this->addBehavior('Burzum/HtmlPurifier.HtmlPurifier', [
-                'fields' => ['field1']
-            ]);
-        }
+    public function initialize(array $config)
+    {
+        parent::initialize($config);
+        $this->addBehavior('Burzum/HtmlPurifier.HtmlPurifier', [
+            'fields' => ['field1']
+        ]);
+    }
 }
 
 /**

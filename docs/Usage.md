@@ -51,4 +51,9 @@ cake purify <table> <fields> --config myconfig
 
 Where ever you need the purifier you can simply add it to your class by using the [PurifierTrait](../src/Lib/PurifierTrait.php).
 
+The trait add two methods:
+
+* **purifyHtml($markup, $config = 'default')**: Cleans a passed string of HTML.
+* **getHtmlPurifier($config = 'default')**: Gets a `\HtmlPurifier` instance by config name.
+
 [See the official php documentation](http://php.net/manual/en/language.oop5.traits.php) for traits if you don't know how to use it.

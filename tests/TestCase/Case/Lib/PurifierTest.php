@@ -1,33 +1,12 @@
 <?php
-/**
- * PurifierTest
- *
- * @author Florian Krämer
- * @copyright 2012 - 2016 Florian Krämer
- * @license MIT
- */
-namespace Burzum\HtmlPurifier\Test\TestCase\Model\Behavior;
+namespace Burzum\HtmlPurifier\Test\TestCase\Lib;
 
-use Burzum\HtmlPurifier\Lib\Purifier;
 use Cake\TestSuite\TestCase;
 
-/**
- * PurifierTest
- */
+use Burzum\HtmlPurifier\Lib\Purifier;
+
 class PurifierTest extends TestCase {
 
-    /**
-     * Fixtures
-     *
-     * @var array
-     */
-    public $fixtures = [];
-
-    /**
-     * startTest
-     *
-     * @return void
-     */
     public function setUp()
     {
         parent::setUp();
@@ -42,6 +21,41 @@ class PurifierTest extends TestCase {
     }
 
     /**
+     * getPurifierInstance
+     *
+     * @return void
+     */
+    public function testConfig()
+    {
+        $this->assertInstanceOf('HTMLPurifier_Config', Purifier::config('default'));
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testConfigInvalidArgumentException()
+    {
+        Purifier::config('does-not-exist');
+    }
+
+    /**
+     * getPurifierInstance
+     *
+     * @return void
+     */
+    public function testGetPurifierInstance()
+    {
+        $this->assertInstanceOf('HTMLPurifier', Purifier::getPurifierInstance('default'));
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testGetPurifierInstanceInvalidArgumentException() {
+        Purifier::getPurifierInstance('does-not-exist');
+    }
+
+    /**
      * testPurifyHtml
      *
      * @return void
@@ -52,16 +66,5 @@ class PurifierTest extends TestCase {
         $expected = '<p><span style="text-decoration:line-through;">shsfhshs</span></p><p><strong>sdhsdhds</strong></p><p><em>shsdh</em><span style="text-decoration:underline;">dsh</span></p><ul><li>sdgsgssgd</li><li>sdgdsg</li><li>sdgsdgsg</li><li>sdgdg</li></ul>';
         $result = Purifier::clean($html);
         $this->assertEquals($result, $expected);
-    }
-
-    /**
-     * testGetHtmlPurifier
-     *
-     * @return void
-     */
-    public function testGetHtmlPurifier()
-    {
-        $result = Purifier::getPurifierInstance();
-        $this->assertInstanceOf('HTMLPurifier', $result);
     }
 }

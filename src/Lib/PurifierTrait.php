@@ -29,6 +29,6 @@ trait PurifierTrait {
      */
     public function getHtmlPurifier($config = 'default')
     {
-        return Purifier::config($config);
+        return Purifier::getPurifierInstance($config);
     }
 }

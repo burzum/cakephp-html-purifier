@@ -35,9 +35,10 @@ class PurifierShell extends Shell {
         $table = TableRegistry::get($this->args[0]);
         $connection = $table->connection();
         $tables = $connection->schemaCollection()->listTables();
-        if (!in_array($this->args[0], $tables)) {
-            $this->abort(__d('Burzum/HtmlPurifier', 'Table `{0}` does not exist in connection `{1}`!', $this->args[0], $connection->configName()));
+        if (!in_array($table->table(), $tables)) {
+            $this->abort(__d('Burzum/HtmlPurifier', 'Table `{0}` does not exist in connection `{1}`!', $table->table(), $connection->configName()));
         }
+        return $table;
     }
 
     /**
@@ -54,6 +55,7 @@ class PurifierShell extends Shell {
                 $this->abort(sprintf('Table `%s` is missing the field `%s`.', $table->table(), $field));
             }
         }
+
         return $fields;
     }
 
@@ -95,11 +97,11 @@ class PurifierShell extends Shell {
 
         $this->helper('progress')->output([
             'total' => $total,
-            'callback' => function ($progress) use ($total, $table) {
+            'callback' => function ($progress) use ($total, $table, $fields) {
                 $chunkSize = 25;
                 $chunkCount = 0;
                 while ($chunkCount <= $total) {
-                    $this->_process($table, $chunkCount, $chunkSize);
+                    $this->_process($table, $chunkCount, $chunkSize, $fields);
                     $chunkCount = $chunkCount + $chunkSize;
                     $progress->increment($chunkSize);
                     $progress->draw();
@@ -117,13 +119,12 @@ class PurifierShell extends Shell {
      * @param int $chunkSize
      * @return void
      */
-    protected function _process(Table $table, $chunkCount, $chunkSize) {
+    protected function _process(Table $table, $chunkCount, $chunkSize, $fields) {
         $query = $table->find();
         if ($table->hasFinder('purifier')) {
             $query->find('purifier');
         }
 
-        $fields = explode(',', $this->param('fields'));
         $fields[] = $table->primaryKey();
 
         $results = $query
@@ -142,7 +143,7 @@ class PurifierShell extends Shell {
                 $table->save($result);
                 $chunkCount++;
             } catch (\Exception $e) {
-                $this->error($e->getMessage());
+                $this->abort($e->getMessage());
             }
         }
     }
