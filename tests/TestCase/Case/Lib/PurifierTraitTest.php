@@ -1,6 +1,6 @@
 <?php
 /**
- * Upload Validator Behavior Test
+ * PurifierTraitTest
  *
  * @author Florian Krämer
  * @copyright 2012 - 2016 Florian Krämer
@@ -9,6 +9,7 @@
 namespace Burzum\HtmlPurifier\Test\TestCase\Model\Behavior;
 
 use Burzum\HtmlPurifier\Lib\Purifier;
+use Burzum\HtmlPurifier\Lib\PurifierTrait;
 use Cake\Event\Event;
 use Cake\ORM\TableRegistry;
 use Cake\ORM\Table;
@@ -18,41 +19,15 @@ use Cake\TestSuite\TestCase;
 /**
  * VoidUploadModel
  */
-class VoidModel extends Table {
-
-    /**
-     * name property
-     *
-     * @var string 'TheVoid'
-     */
-    public $name = 'VoidModel';
-
-    /**
-     * useTable property
-     *
-     * @var bool false
-     */
-    public $useTable = false;
-
-    /**
-     * Initialize
-     *
-     * @param array $config
-     * @return void
-     */
-        public function initialize(array $config)
-        {
-            parent::initialize($config);
-            $this->addBehavior('Burzum/HtmlPurifier.HtmlPurifier', [
-                'fields' => ['field1']
-            ]);
-        }
+class PurifierTraitTestClass
+{
+    use PurifierTrait;
 }
 
 /**
  * HtmlPurifierBehaviorTest
  */
-class HtmlPurifierBehaviorTest extends TestCase {
+class PurifierTraitTest extends TestCase {
 
     /**
      * Fixtures
@@ -78,7 +53,7 @@ class HtmlPurifierBehaviorTest extends TestCase {
             'HTML.Doctype' => 'XHTML 1.0 Transitional'
         ]);
 
-        $this->table = new VoidModel();
+        $this->class = new PurifierTraitTestClass();
     }
 
     /**
@@ -88,26 +63,25 @@ class HtmlPurifierBehaviorTest extends TestCase {
      */
     public function tearDown()
     {
-        unset($this->table);
+        unset($this->class);
     }
 
     /**
-     * testBeforeMarshal
+     * testPurifyHtml
      *
      * @return void
      */
-    public function testBeforeMarshal()
+    public function testPurifyHtml()
     {
         $html = '<p style="font-weight: bold;"><script>alert("alert!");</script><span style="text-decoration: line-through;" _mce_style="text-decoration: line-through;">shsfhshs</span></p><p><strong>sdhsdhds</strong></p><p><em>shsdh</em><span style="text-decoration: underline;" _mce_style="text-decoration: underline;">dsh</span></p><ul><li>sdgsgssgd</li><li>sdgdsg</li><li>sdgsdgsg</li><li>sdgdg<br></li></ul>';
         $expected = '<p><span style="text-decoration:line-through;">shsfhshs</span></p><p><strong>sdhsdhds</strong></p><p><em>shsdh</em><span style="text-decoration:underline;">dsh</span></p><ul><li>sdgsgssgd</li><li>sdgdsg</li><li>sdgsdgsg</li><li>sdgdg</li></ul>';
-        $event = new Event('Model.beforeMarshal');
-        $data = new \ArrayObject([
-            'field1' => $html,
-            'field2' => '<b>Don\'t change me!</b>'
-        ]);
-        $options = new \ArrayObject();
-        $this->table->behaviors()->HtmlPurifier->beforeMarshal($event, $data, $options);
-        $this->assertEquals($data['field1'], $expected);
-        $this->assertEquals($data['field2'], '<b>Don\'t change me!</b>');
+        $result = $this->class->purifyHtml($html);
+        $this->assertEquals($result, $expected);
+    }
+
+    public function testGetHtmlPurifier()
+    {
+        $result = $this->class->getHtmlPurifier();
+        $this->assertInstanceOf('HTMLPurifier_Config', $result);
     }
 }
