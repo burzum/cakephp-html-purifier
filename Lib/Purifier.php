@@ -6,7 +6,7 @@
  * @copyright 2012 Florian Krämer
  * @license MIT
  */
-class Purifier extends Object {
+class Purifier extends CakeObject {
 /**
  * Purifier configurations
  *
