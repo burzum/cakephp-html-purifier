@@ -46,8 +46,8 @@ class Purifier
     /**
      * Gets and sets purifier configuration sets.
      *
-     * @param  string $configName
-     * @param  string $config
+     * @param  string $configName Name
+     * @param  string|array|null|\HTMLPurifier_Config $config Purifier Config
      * @throws \InvalidArgumentException
      * @return \HTMLPurifier_Config
      */
