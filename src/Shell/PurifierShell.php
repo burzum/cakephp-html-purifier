@@ -106,6 +106,7 @@ class PurifierShell extends Shell {
                     $progress->increment($chunkSize);
                     $progress->draw();
                 }
+                return;
             }
         ]);
     }

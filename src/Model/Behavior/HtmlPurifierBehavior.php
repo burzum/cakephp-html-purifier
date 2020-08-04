@@ -40,9 +40,10 @@ class HtmlPurifierBehavior extends Behavior {
      *
      * @param \Cake\Event\Event $event The Model.beforeMarshal event.
      * @param \ArrayObject $data Data.
+     * @param \ArrayObject $options Options.
      * @return void
      */
-    public function beforeMarshal(Event $event, ArrayObject $data)
+    public function beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options)
     {
         foreach ($this->config('fields') as $key => $field) {
             if (is_int($key) && isset($data[$field])) {

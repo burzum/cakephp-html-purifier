@@ -105,7 +105,8 @@ class HtmlPurifierBehaviorTest extends TestCase {
             'field1' => $html,
             'field2' => '<b>Don\'t change me!</b>'
         ]);
-        $this->table->behaviors()->HtmlPurifier->beforeMarshal($event, $data);
+        $options = new \ArrayObject();
+        $this->table->behaviors()->HtmlPurifier->beforeMarshal($event, $data, $options);
         $this->assertEquals($data['field1'], $expected);
         $this->assertEquals($data['field2'], '<b>Don\'t change me!</b>');
     }
