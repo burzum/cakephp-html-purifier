@@ -13,6 +13,7 @@ The plugin includes a trait, a view helper, a behavior and a shell to clean your
 
 ---
 
+**For CakePHP 3.x use the 2.x version or branch!**
 **For CakePHP 2.x use the 1.x version or branch!**
 
 Documentation
@@ -38,7 +39,7 @@ Contributing to this Plugin
 Please feel free to contribute to the plugin with new issues, requests, unit tests and code fixes or new features. If you want to contribute some code, create a feature branch from develop, and send us your pull request. Unit tests for new features and issues detected are mandatory to keep quality high.
 
 * Contributions must follow the [PSR2 coding standard recommendation](https://github.com/php-fig-rectified/fig-rectified-standards).
-* [Unit tests](http://book.cakephp.org/3.0/en/development/testing.html) are required.
+* [Unit tests](https://book.cakephp.org/4/en/development/testing.html) are required.
 
 License
 -------
