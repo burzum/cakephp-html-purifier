@@ -5,6 +5,9 @@ use Cake\TestSuite\TestCase;
 
 use Burzum\HtmlPurifier\Lib\Purifier;
 
+/**
+ * PurifierTest
+ */
 class PurifierTest extends TestCase {
 
     public function setUp()

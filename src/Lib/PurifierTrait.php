@@ -2,13 +2,17 @@
 /**
  * Purifier
  *
- * @author Florian Krämer
- * @copyright 2012 - 2016 Florian Krämer
- * @license MIT
+ * @author    Florian Krämer
+ * @copyright 2012 - 2018 Florian Krämer
+ * @license   MIT
  */
 namespace Burzum\HtmlPurifier\Lib;
 
-trait PurifierTrait {
+/**
+ * Purifier Trait
+ */
+trait PurifierTrait
+{
 
     /**
      * Cleans markup
@@ -24,8 +28,8 @@ trait PurifierTrait {
     /**
      * Gets a HtmlPurifier instance based on a configuration name.
      *
-     * @param string $config
-     * @return \HtmlPurifier
+     * @param  string $config
+     * @return HTMLPurifier
      */
     public function getHtmlPurifier($config = 'default')
     {

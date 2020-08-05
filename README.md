@@ -13,7 +13,8 @@ The plugin includes a trait, a view helper, a behavior and a shell to clean your
 
 ---
 
-**For CakePHP 2.x use the 1.x version or branch!**
+* For **CakePHP 2.x** use the 1.x version or branch.
+* For **CakePHP <=3.5** use the 2.0 version or branch.
 
 Documentation
 -------------
@@ -24,13 +25,6 @@ Support
 -------
 
 For support and feature request, please visit the [Support Site](https://github.com/burzum/cakephp-html-purifier/issues).
-
-Branch strategy
--------------
-
-* The **master** branch holds the `STABLE` latest version of the plugin.
-* The **2.0** branch is `UNSTABLE` and used to test new features before releasing them.
-* Only **hot fixes** are accepted against the master branch.
 
 Contributing to this Plugin
 ---------------------------
@@ -43,6 +37,6 @@ Please feel free to contribute to the plugin with new issues, requests, unit tes
 License
 -------
 
-Copyright 2012 - 2016 Florian Krämer
+Copyright 2012 - 2018 Florian Krämer
 
 Licensed under the [MIT](http://www.opensource.org/licenses/mit-license.php) License. Redistributions of the source code included in this repository must retain the copyright notice found in each file.

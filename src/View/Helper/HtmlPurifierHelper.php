@@ -3,7 +3,7 @@
  * HtmlPurifierHelper
  *
  * @author Florian Krämer
- * @copyright 2012 - 2016 Florian Krämer
+ * @copyright 2012 - 2018 Florian Krämer
  * @license MIT
  */
 namespace Burzum\HtmlPurifier\View\Helper;
@@ -11,7 +11,11 @@ namespace Burzum\HtmlPurifier\View\Helper;
 use Burzum\HtmlPurifier\Lib\Purifier;
 use Cake\View\Helper;
 
-class HtmlPurifierHelper extends Helper {
+/**
+ * HtmlPurifierHelper
+ */
+class HtmlPurifierHelper extends Helper
+{
 
     /**
      * Default config
@@ -25,15 +29,16 @@ class HtmlPurifierHelper extends Helper {
     /**
      * Clean markup
      *
-     * @param string $markup
-     * @param string $config
+     * @param string $markup Markup string to be sanitized
+     * @param string $config Purifier config name
      * @return string
      */
     public function clean($markup, $config = null)
     {
         if (empty($config) && !empty($this->_config['config'])) {
-            $config = $this->config('config');
+            $config = $this->getConfig('config');
         }
+
         return Purifier::clean($markup, $config);
     }
 }

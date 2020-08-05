@@ -2,13 +2,17 @@
 /**
  * Purifier
  *
- * @author Florian Krämer
- * @copyright 2012 - 2016 Florian Krämer
- * @license MIT
+ * @author    Florian Krämer
+ * @copyright 2012 - 2018 Florian Krämer
+ * @license   MIT
  */
 namespace Burzum\HtmlPurifier\Lib;
 
-class Purifier {
+/**
+ * Purifier
+ */
+class Purifier
+{
 
     /**
      * Purifier configurations
@@ -27,7 +31,7 @@ class Purifier {
     /**
      * Return a singleton instance of the StorageManager.
      *
-     * @return ClassRegistry instance
+     * @return Purifier Purifier instance
      */
     public static function &getInstance()
     {
@@ -35,16 +39,17 @@ class Purifier {
         if (!$instance) {
             $instance[0] = new Purifier();
         }
+
         return $instance[0];
     }
 
     /**
      * Gets and sets purifier configuration sets.
      *
-     * @param string $configName
-     * @param string $config
+     * @param  string $configName
+     * @param  string $config
      * @throws \InvalidArgumentException
-     * @return \HTMLPurifier
+     * @return \HTMLPurifier_Config
      */
     public static function config($configName, $config = null)
     {
@@ -74,7 +79,7 @@ class Purifier {
     /**
      * Gets an instance of the purifier lib only when needed, lazy loading it
      *
-     * @param string $configName
+     * @param  string $configName
      * @return HTMLPurifier
      */
     public static function getPurifierInstance($configName = 'default')
