@@ -3,8 +3,8 @@ CakePHP HTML Purifier Plugin
 
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.txt)
 [![Build Status](https://img.shields.io/travis/burzum/cakephp-html-purifier/2.0.svg?style=flat-square)](https://travis-ci.org/burzum/cakephp-html-purifier)
-[![Coverage Status](https://img.shields.io/coveralls/burzum/cakephp-html-purifier.svg?branch=2.0.svg?style=flat-square)](https://coveralls.io/r/burzum/cakephp-html-purifier)
-[![Code Quality](https://img.shields.io/scrutinizer/g/burzum/cakephp-html-purifier.svg?branch=2.0?style=flat-square)](https://coveralls.io/r/burzum/cakephp-html-purifier)
+[![Scrutinizer Coverage](https://img.shields.io/scrutinizer/coverage/g/burzum/cakephp-html-purifier/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/cakephp-html-purifier/)
+[![Code Quality](https://img.shields.io/scrutinizer/g/burzum/cakephp-html-purifier.svg?branch=2.0?style=flat-square)](https://scrutinizer.io/r/burzum/cakephp-html-purifier)
 
 This is a CakePHP wrapper for [the HTML Purifier lib](http://htmlpurifier.org/).
 
