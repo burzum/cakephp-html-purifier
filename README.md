@@ -2,8 +2,9 @@ CakePHP HTML Purifier Plugin
 ----------------------------
 
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.txt)
-[![Build Status](https://img.shields.io/travis/burzum/cakephp-html-purifier/master.svg?style=flat-square)](https://travis-ci.org/burzum/cakephp-html-purifier)
-[![Build Status](https://img.shields.io/coveralls/burzum/cakephp-html-purifier/master.svg?style=flat-square)](https://coveralls.io/r/burzum/cakephp-html-purifier)
+[![Build Status](https://img.shields.io/travis/burzum/cakephp-html-purifier/2.0.svg?style=flat-square)](https://travis-ci.org/burzum/cakephp-html-purifier)
+[![Coverage Status](https://img.shields.io/coveralls/burzum/cakephp-html-purifier.svg?branch=2.0.svg?style=flat-square)](https://coveralls.io/r/burzum/cakephp-html-purifier)
+[![Code Quality](https://img.shields.io/scrutinizer/g/burzum/cakephp-html-purifier.svg?branch=2.0?style=flat-square)](https://coveralls.io/r/burzum/cakephp-html-purifier)
 
 This is a CakePHP wrapper for [the HTML Purifier lib](http://htmlpurifier.org/).
 
@@ -15,6 +16,7 @@ The plugin includes a trait, a view helper, a behavior and a shell to clean your
 
 * For **CakePHP 2.x** use the 1.x version or branch.
 * For **CakePHP <=3.5** use the 2.0 version or branch.
+* For **CakePHP > 3.5** use the 3.0 version or branch.
 
 Documentation
 -------------
@@ -32,7 +34,7 @@ Contributing to this Plugin
 Please feel free to contribute to the plugin with new issues, requests, unit tests and code fixes or new features. If you want to contribute some code, create a feature branch from develop, and send us your pull request. Unit tests for new features and issues detected are mandatory to keep quality high.
 
 * Contributions must follow the [PSR2 coding standard recommendation](https://github.com/php-fig-rectified/fig-rectified-standards).
-* [Unit tests](http://book.cakephp.org/3.0/en/development/testing.html) are required.
+* [Unit tests](https://book.cakephp.org/4/en/development/testing.html) are required.
 
 License
 -------
