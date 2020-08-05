@@ -2,8 +2,9 @@ CakePHP HTML Purifier Plugin
 ----------------------------
 
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.txt)
-[![Build Status](https://img.shields.io/travis/burzum/cakephp-html-purifier/master.svg?style=flat-square)](https://travis-ci.org/burzum/cakephp-html-purifier)
-[![Build Status](https://img.shields.io/coveralls/burzum/cakephp-html-purifier/master.svg?style=flat-square)](https://coveralls.io/r/burzum/cakephp-html-purifier)
+[![Build Status](https://img.shields.io/travis/burzum/cakephp-html-purifier/2.0.svg?style=flat-square)](https://travis-ci.org/burzum/cakephp-html-purifier)
+[![Coverage Status](https://img.shields.io/coveralls/burzum/cakephp-html-purifier.svg?branch=2.0.svg?style=flat-square)](https://coveralls.io/r/burzum/cakephp-html-purifier)
+[![Code Quality](https://img.shields.io/scrutinizer/g/burzum/cakephp-html-purifier.svg?branch=2.0?style=flat-square)](https://coveralls.io/r/burzum/cakephp-html-purifier)
 
 This is a CakePHP wrapper for [the HTML Purifier lib](http://htmlpurifier.org/).
 
@@ -13,8 +14,9 @@ The plugin includes a trait, a view helper, a behavior and a shell to clean your
 
 ---
 
-**For CakePHP 3.x use the 2.x version or branch!**
-**For CakePHP 2.x use the 1.x version or branch!**
+* For **CakePHP 2.x** use the 1.x version or branch.
+* For **CakePHP <=3.5** use the 2.0 version or branch.
+* For **CakePHP > 3.5** use the 3.0 version or branch.
 
 Documentation
 -------------
@@ -25,13 +27,6 @@ Support
 -------
 
 For support and feature request, please visit the [Support Site](https://github.com/burzum/cakephp-html-purifier/issues).
-
-Branch strategy
--------------
-
-* The **master** branch holds the `STABLE` latest version of the plugin.
-* The **2.0** branch is `UNSTABLE` and used to test new features before releasing them.
-* Only **hot fixes** are accepted against the master branch.
 
 Contributing to this Plugin
 ---------------------------
@@ -44,6 +39,6 @@ Please feel free to contribute to the plugin with new issues, requests, unit tes
 License
 -------
 
-Copyright 2012 - 2016 Florian Krämer
+Copyright 2012 - 2018 Florian Krämer
 
 Licensed under the [MIT](http://www.opensource.org/licenses/mit-license.php) License. Redistributions of the source code included in this repository must retain the copyright notice found in each file.
