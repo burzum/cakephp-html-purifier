@@ -18,7 +18,7 @@ class PurifierTraitTest extends TestCase {
      */
     public $testClass;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

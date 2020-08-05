@@ -40,7 +40,7 @@ class VoidModel extends Table {
      * @param array $config
      * @return void
      */
-    public function initialize(array $config)
+    public function initialize(array $config): void
     {
         parent::initialize($config);
         $this->addBehavior('Burzum/HtmlPurifier.HtmlPurifier', [
@@ -66,7 +66,7 @@ class HtmlPurifierBehaviorTest extends TestCase {
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -86,7 +86,7 @@ class HtmlPurifierBehaviorTest extends TestCase {
      *
      * @return void
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->table);
     }

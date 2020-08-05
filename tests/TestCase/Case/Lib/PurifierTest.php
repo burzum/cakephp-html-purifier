@@ -10,7 +10,7 @@ use Burzum\HtmlPurifier\Lib\Purifier;
  */
 class PurifierTest extends TestCase {
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -34,10 +34,11 @@ class PurifierTest extends TestCase {
     }
 
     /**
-     * @expectedException \InvalidArgumentException
+     * @return void
      */
     public function testConfigInvalidArgumentException()
     {
+        $this->expectException(\InvalidArgumentException::class);
         Purifier::config('does-not-exist');
     }
 
@@ -52,9 +53,11 @@ class PurifierTest extends TestCase {
     }
 
     /**
-     * @expectedException \InvalidArgumentException
+     * @return void
      */
-    public function testGetPurifierInstanceInvalidArgumentException() {
+    public function testGetPurifierInstanceInvalidArgumentException()
+    {
+        $this->expectException(\InvalidArgumentException::class);
         Purifier::getPurifierInstance('does-not-exist');
     }
 
