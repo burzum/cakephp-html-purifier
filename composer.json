@@ -18,7 +18,7 @@
 		"ezyang/htmlpurifier": "*"
 	},
 	"require-dev": {
-                "cakephp/cakephp-codesniffer": "^3.0",
+        "cakephp/cakephp-codesniffer": "~4.2.0",
 		"phpunit/phpunit": "~8.5.0"
 	},
 	"autoload": {
