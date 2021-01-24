@@ -8,9 +8,11 @@
  */
 namespace Burzum\HtmlPurifier\Shell;
 
+use Cake\Console\ConsoleOptionParser;
 use Cake\Console\Shell;
 use Cake\ORM\Locator\TableLocator;
 use Cake\ORM\Table;
+use Cake\Datasource\EntityInterface;
 
 /**
  * PurifierShell
@@ -31,7 +33,7 @@ class PurifierShell extends Shell
     /**
      * Gets the table from the shell args.
      *
-     * @return \Cake\ORM\Table;
+     * @return \Cake\ORM\Table
      */
     protected function _getTable()
     {
@@ -67,7 +69,7 @@ class PurifierShell extends Shell
     /**
      * Loads the purifier behavior for the given table if not already attached.
      *
-     * @param  \Cake\ORM\Table                 $table Table object.
+     * @param  \Cake\ORM\Table $table Table object.
      * @param  array Set of fields to sanitize
      * @return void
      */
@@ -100,7 +102,7 @@ class PurifierShell extends Shell
         }
         $total = $query->all()->count();
 
-        $this->info(__d('Burzum/HtmlPurifier', 'Sanitizing fields `{0}` in table `{1}`', implode(',', $fields), $table->table()));
+        $this->info(__d('Burzum/HtmlPurifier', 'Sanitizing fields `{0}` in table `{1}`', implode(',', $fields), $table->getTable()));
 
         $this->helper('progress')->output(
             [
@@ -142,7 +144,7 @@ class PurifierShell extends Shell
             ->select($fields)
             ->offset($chunkCount)
             ->limit($chunkSize)
-            ->orderDesc($table->aliasField($table->primarygetPrimaryKey()))
+            ->orderDesc($table->aliasField($table->getPrimaryKey()))
             ->all();
 
         if (empty($results)) {
@@ -151,6 +153,7 @@ class PurifierShell extends Shell
 
         foreach ($results as $result) {
             try {
+                $table->patchEntity($result, $result->toArray());
                 $table->save($result);
                 $chunkCount++;
             } catch (\Exception $e) {
@@ -162,7 +165,7 @@ class PurifierShell extends Shell
     /**
      * {@inheritDoc}
      */
-    public function getOptionParser()
+    public function getOptionParser(): ConsoleOptionParser
     {
         $parser = parent::getOptionParser();
 

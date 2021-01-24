@@ -6,12 +6,12 @@ Set a config you want to use and the fields you want to sanitize.
 
 ```php
 public $actsAs = array(
-	'Burzum/HtmlPurifier.HtmlPurifier' => array(
-		'config' => 'ConfigName',
-		'fields' => array(
+	'Burzum/HtmlPurifier.HtmlPurifier' => [
+		'purifierConfig' => 'ConfigName',
+		'fields' => [
 			'body', 'excerpt'
-		)
-	)
+        ]
+    ]
 );
 ```
 
