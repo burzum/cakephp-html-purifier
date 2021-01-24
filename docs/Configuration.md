@@ -4,15 +4,20 @@
 
 Important: Before you start declaring a configuration you should lookup how HTML Purifier can be configured. http://htmlpurifier.org/docs
 
+In `src/Application.php` add:
+```php
+$this->addPlugin('Burzum/HtmlPurifier');
+```
+
 In `config/boostrap.php` you can either set the purifier config as an array or pass a native config object.
 
 The array style would look like this:
 
 ```php
-Purifier::config('ConfigName', array(
+Purifier::config('ConfigName', [
 		'HTML.AllowedElements' => 'a, em, blockquote, p, strong, pre, code, span,ul,ol,li,img',
 		'HTML.AllowedAttributes' => 'a.href, a.title, img.src, img.alt'
-	)
+	]
 );
 ```
 
@@ -48,6 +53,8 @@ or clean some dirty HTML directly by calling
 Purifier::clean($markup, 'ConfigName');
 ```
 
+*Remember to add `use Burzum\HtmlPurifier\Lib\Purifier;` when ussing `Purifier` class*
+
 For some automatization you can also use the Behavior or Helper.
 
 ## Caching ###
@@ -55,9 +62,9 @@ For some automatization you can also use the Behavior or Helper.
 It is recommended to change the path of the purifier libs cache to your `tmp` folder. For example:
 
 ```php
-Purifier::config('ConfigName', array(
+Purifier::config('ConfigName', [
 		'Cache.SerializerPath' => ROOT . DS . 'tmp' . DS . 'purifier',
-	)
+    ]
 );
 ```
 
